@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/assets/alagaq-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Patient Intake · CareLink</title>
+    <link rel="stylesheet" href="/assets/app.css?v=5" />
+    <script defer src="/assets/app.js?v=5"></script>
+    <script defer src="/assets/pages/consultation.js?v=5"></script>
+  </head>
+  <body data-page="consultation">
+    <div id="app-header"></div>
+    <main class="page-shell">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">CLINICAL WORKFLOW</p>
+          <h1>Patient intake</h1>
+          <p class="muted">Capture the visit and submit it to the doctor. Answer revision requests here.</p>
+        </div>
+        <span class="pill">Staff submission → Doctor review → Revision or approval</span>
+      </div>
+      <div id="toast" class="toast" role="status"></div>
+
+      <section class="panel" id="revision-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">ACTION NEEDED</p>
+            <h2>Revision requests from doctors</h2>
+          </div>
+        </div>
+        <div id="revision-list" class="review-list"><p class="empty-cell">Loading…</p></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">NEW SUBMISSION</p>
+            <h2>Consultation record</h2>
+          </div>
+          <span class="required-note">* Required</span>
+        </div>
+        <form id="consultation-form" class="stack-form form-narrow">
+          <label>
+            Checked-in appointment *
+            <select name="appointment_id" id="consultation-appointment" required></select>
+          </label>
+          <div id="consultation-context" class="patient-context">
+            Choose an appointment to view the linked patient details.
+          </div>
+          <label>
+            Symptoms &amp; reason for visit *
+            <textarea
+              name="symptoms"
+              rows="4"
+              maxlength="4000"
+              required
+              placeholder="Record the patient's reported symptoms and reason for the visit."
+            ></textarea>
+          </label>
+          <label>
+            Intake notes
+            <textarea
+              name="clinical_notes"
+              rows="4"
+              maxlength="4000"
+              placeholder="Relevant history, allergies, vitals, or other intake details."
+            ></textarea>
+          </label>
+          <button class="button primary" type="submit">Submit for doctor review</button>
+          <p id="consultation-result" class="form-message"></p>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">RECENT RECORDS</p>
+            <h2>Consultation status</h2>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Record</th>
+                <th>Patient</th>
+                <th>Appointment</th>
+                <th>Symptoms</th>
+                <th>Status</th>
+                <th>Doctor comment</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="consultation-rows">
+              <tr><td colspan="7" class="empty-cell">Loading records…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

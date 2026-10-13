@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" type="image/png" href="/assets/alagaq-logo.png" />
+    <title>Live Queue Display · AlagaQ</title>
+    <link rel="stylesheet" href="/assets/app.css?v=5" />
+    <link rel="stylesheet" href="./assets/display.css?v=1" />
+    <script defer src="/assets/queue-display.js"></script>
+  </head>
+  <body class="display-page">
+    <header class="display-header">
+      <a class="display-brand" href="/register.html">
+        <img src="./assets/alagaq-logo.png" alt="AlagaQ" />
+        <span>
+          ALAGAQ
+          <small>LIVE QUEUE</small>
+        </span>
+      </a>
+      <div>
+        <span id="display-date"></span>
+        <span class="display-live">
+          <i></i>
+          LIVE
+        </span>
+      </div>
+    </header>
+    <main class="display-grid">
+      <section class="display-card serving-card">
+        <p class="eyebrow">NOW SERVING</p>
+        <strong id="now-serving" class="display-ticket">A---</strong>
+        <p id="serving-service" class="display-service">Waiting for the next patient</p>
+      </section>
+      <section class="display-card next-card">
+        <p class="eyebrow">NEXT IN LINE</p>
+        <strong id="next-in-line" class="display-ticket">A---</strong>
+        <p id="next-service" class="display-service">No one is waiting</p>
+      </section>
+      <section class="display-waiting">
+        <div class="display-section-heading">
+          <div>
+            <p class="eyebrow">UP NEXT</p>
+            <h1>Waiting patients</h1>
+          </div>
+          <a href="/register.html" class="display-register-link">Get a ticket</a>
+        </div>
+        <ol id="waiting-list" class="display-list">
+          <li class="display-empty">The queue is clear.</li>
+        </ol>
+      </section>
+    </main>
+    <footer class="display-footer">
+      <span>Please proceed when your number is called.</span>
+      <span id="display-updated">Connecting to queue…</span>
+    </footer>
+  </body>
+</html>

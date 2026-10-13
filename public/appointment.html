@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/assets/alagaq-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Visit Details · CareLink</title>
+    <link rel="stylesheet" href="/assets/app.css?v=5" />
+    <script defer src="/assets/app.js?v=5"></script>
+    <script defer src="/assets/pages/appointment.js?v=5"></script>
+  </head>
+  <body data-page="appointment">
+    <div id="app-header"></div>
+    <main class="page-shell">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">VISIT DETAILS</p>
+          <h1 id="visit-title">Loading visit…</h1>
+          <p class="muted" id="visit-subtitle">Appointment, intake, review, files and history in one place.</p>
+        </div>
+        <div class="heading-actions">
+          <span id="visit-status"></span>
+          <a class="button secondary" href="/queue.html">← All appointments</a>
+        </div>
+      </div>
+      <div id="toast" class="toast" role="status"></div>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">APPOINTMENT</p>
+            <h2>Visit and patient</h2>
+          </div>
+        </div>
+        <dl id="visit-details" class="detail-list"></dl>
+      </section>
+
+      <div class="content-grid">
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">CLINICAL RECORD</p>
+              <h2>Consultation</h2>
+            </div>
+            <span id="consultation-status"></span>
+          </div>
+          <div id="consultation-body"><p class="empty-cell">Loading…</p></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">FEEDBACK</p>
+              <h2>Comments &amp; review notes</h2>
+            </div>
+            <a id="comments-link" class="button secondary small-button hidden" href="#">Open thread</a>
+          </div>
+          <div id="comment-list" class="comment-thread"></div>
+        </section>
+      </div>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">DOCUMENTS</p>
+            <h2>Patient files and versions</h2>
+          </div>
+          <a class="button secondary small-button" href="/files.html">Upload or revise</a>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>File</th>
+                <th>Category</th>
+                <th>Version</th>
+                <th>Status</th>
+                <th>Uploaded by</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="file-rows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="content-grid">
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">QUEUE HISTORY</p>
+              <h2>Timeline</h2>
+            </div>
+          </div>
+          <ul id="queue-timeline" class="timeline"></ul>
+        </section>
+
+        <section class="panel" id="audit-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">GOVERNANCE · ADMIN ONLY</p>
+              <h2>Audit entries</h2>
+            </div>
+          </div>
+          <ul id="audit-timeline" class="timeline"></ul>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

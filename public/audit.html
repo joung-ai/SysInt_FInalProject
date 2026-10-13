@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/assets/alagaq-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Audit Trail · CareLink</title>
+    <link rel="stylesheet" href="/assets/app.css?v=5" />
+    <script defer src="/assets/app.js?v=5"></script>
+    <script defer src="/assets/pages/audit.js?v=5"></script>
+  </head>
+  <body data-page="audit">
+    <div id="app-header"></div>
+    <main class="page-shell">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">GOVERNANCE</p>
+          <h1>Audit trail</h1>
+          <p class="muted">Append-only history of user actions and system integrations.</p>
+        </div>
+        <span class="pill">Immutable log · enforced by database triggers</span>
+      </div>
+      <div id="toast" class="toast" role="status"></div>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">ALL ACTIVITY</p>
+            <h2>Recent actions</h2>
+          </div>
+          <form id="audit-filter" class="filter-bar">
+            <label class="compact-label">
+              Action contains
+              <input name="action" placeholder="e.g. approved" />
+            </label>
+            <button class="button secondary" type="submit">Filter</button>
+          </form>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Actor</th>
+                <th>Role</th>
+                <th>Action</th>
+                <th>Record</th>
+                <th>Details</th>
+                <th>IP address</th>
+              </tr>
+            </thead>
+            <tbody id="audit-rows">
+              <tr><td colspan="7" class="empty-cell">Loading audit history…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

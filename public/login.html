@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/assets/alagaq-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sign in · CareLink</title>
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="stylesheet" href="/assets/app.css?v=5" />
+    <script defer src="/assets/app.js?v=5"></script>
+    <script defer src="/assets/pages/login.js?v=5"></script>
+  </head>
+  <body data-page="login" class="login-page">
+    <main class="login-wrap">
+      <section class="login-card">
+        <a class="brand" href="/login.html">
+          <img class="brand-logo" src="/assets/alagaq-logo.png" alt="" />
+          <span>
+            CareLink
+            <small>ALAGAQ INTEGRATION PORTAL</small>
+          </span>
+        </a>
+        <p class="eyebrow">SECURE CLINIC ACCESS</p>
+        <h1>Welcome back</h1>
+        <p class="muted">Sign in with your assigned role to continue.</p>
+
+        <form id="login-form" class="stack-form">
+          <label>
+            Username
+            <input name="username" autocomplete="username" required />
+          </label>
+          <label>
+            Password
+            <input name="password" type="password" autocomplete="current-password" required />
+          </label>
+          <label>
+            Role
+            <select name="role" required>
+              <option value="">Select your role</option>
+              <option>Admin</option>
+              <option>Doctor</option>
+              <option>Clinic Staff</option>
+              <option>Patient</option>
+            </select>
+          </label>
+          <button class="button primary full" type="submit">
+            Sign in
+            <span aria-hidden="true">→</span>
+          </button>
+        </form>
+        <p id="login-error" class="form-message" role="status"></p>
+
+        <div class="demo-hint">
+          <strong>Demo sign-in</strong>
+          <span>admin, doctor1, doctor2, clinic1, or patient1</span>
+          <span>Password: SysInt2026!</span>
+        </div>
+        <div class="login-public-links">
+          <a href="/register.html">Get a patient queue ticket</a>
+          <a href="/display.html">View live queue display</a>
+        </div>
+        <p class="fine-print">Demo environment · Do not enter real patient information</p>
+      </section>
+
+      <aside class="login-aside">
+        <div class="aside-orb"></div>
+        <p class="eyebrow">CONNECTED CARE, ONE WORKFLOW</p>
+        <h2>Appointments, care teams and patient updates in sync.</h2>
+        <p>
+          Coordinate the visit from check-in through clinical review, with a clear queue and a record of every action.
+        </p>
+        <div class="aside-points">
+          <span>
+            01
+            <b>Appointment &amp; queue</b>
+          </span>
+          <span>
+            02
+            <b>Clinical review &amp; revisions</b>
+          </span>
+          <span>
+            03
+            <b>Patient SMS / email notification</b>
+          </span>
+        </div>
+      </aside>
+    </main>
+  </body>
+</html>

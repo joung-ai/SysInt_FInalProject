@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/assets/alagaq-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Integrations · CareLink</title>
+    <link rel="stylesheet" href="/assets/app.css?v=5" />
+    <script defer src="/assets/app.js?v=5"></script>
+    <script defer src="/assets/pages/integrations.js?v=5"></script>
+  </head>
+  <body data-page="integrations">
+    <div id="app-header"></div>
+    <main class="page-shell">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">INTEGRATION HUB</p>
+          <h1>Integrations</h1>
+          <p class="muted">Import appointments from CSV, export approved records, and trace every integration step.</p>
+        </div>
+        <span class="pill">Event bus · SMS/email gateway · CSV ETL</span>
+      </div>
+      <div id="toast" class="toast" role="status"></div>
+
+      <div class="content-grid">
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">ETL · IMPORT</p>
+              <h2>Appointment CSV import</h2>
+            </div>
+          </div>
+          <p class="muted">
+            Columns:
+            <span class="mono">patient_mrn, full_name, phone, email, scheduled_at, reason, doctor_username</span>
+            . Rows are cleaned and validated; duplicates are skipped and invalid rows are rejected with a reason.
+          </p>
+          <form id="import-form" class="stack-form">
+            <label>
+              CSV file
+              <input name="file" type="file" accept=".csv,text/csv" required />
+            </label>
+            <button class="button primary" type="submit">Import appointments</button>
+          </form>
+          <p id="import-result" class="form-message"></p>
+        </section>
+
+        <section class="panel" id="export-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">ETL · EXPORT · ADMIN</p>
+              <h2>PhilHealth export</h2>
+            </div>
+          </div>
+          <p class="muted">
+            Extract doctor-approved consultations, map them to the demonstration CSV layout, and write a versioned file
+            plus
+            <span class="mono">latest.csv</span>
+            .
+          </p>
+          <div class="review-actions">
+            <button id="export-button" class="button primary">Generate CSV export</button>
+            <button id="download-latest" class="button secondary">Download latest.csv</button>
+          </div>
+          <p id="export-result" class="form-message"></p>
+        </section>
+      </div>
+
+      <section class="panel hidden" id="import-rows-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">LAST IMPORT</p>
+            <h2>Row-by-row result</h2>
+          </div>
+          <span id="import-summary"></span>
+        </div>
+        <div class="table-wrap">
+          <table class="compact">
+            <thead>
+              <tr>
+                <th>CSV row</th>
+                <th>Status</th>
+                <th>Result</th>
+              </tr>
+            </thead>
+            <tbody id="import-rows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel" id="log-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">SYSTEM LOG · ADMIN</p>
+            <h2>Integration log</h2>
+          </div>
+          <div class="filter-bar">
+            <label class="compact-label">
+              Integration
+              <select id="log-integration">
+                <option value="">All</option>
+                <option value="event_bus">Event bus</option>
+                <option value="sms_gateway">SMS gateway</option>
+                <option value="email_gateway">Email gateway</option>
+                <option value="csv_import">CSV import</option>
+                <option value="philhealth_export">PhilHealth export</option>
+              </select>
+            </label>
+            <label class="compact-label">
+              Status
+              <select id="log-status">
+                <option value="">All</option>
+                <option value="success">Success</option>
+                <option value="partial">Partial</option>
+                <option value="failed">Failed</option>
+              </select>
+            </label>
+            <button id="clear-transaction" class="button secondary small-button hidden" type="button">
+              Clear transaction filter
+            </button>
+            <button id="refresh-logs" class="button secondary" type="button">Refresh</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Transaction ID</th>
+                <th>Integration</th>
+                <th>Action</th>
+                <th>Record</th>
+                <th>Status</th>
+                <th>Error message</th>
+              </tr>
+            </thead>
+            <tbody id="log-rows">
+              <tr><td colspan="7" class="empty-cell">Loading integration log…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "name": "healthcare-integration-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Healthcare appointment, queue, review, notification and ETL integration demo",
+  "main": "src/index.js",
+  "scripts": {
+    "setup": "node src/setup.js",
+    "seed": "node src/seed.js",
+    "test": "node --test --test-reporter=spec",
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "engines": { "node": ">=18.17" },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.10.0",
+    "express": "^4.21.2",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.0.2"
+  }
+}

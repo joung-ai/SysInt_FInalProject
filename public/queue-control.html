@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/assets/alagaq-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Queue Terminal · CareLink</title>
+    <link rel="stylesheet" href="/assets/app.css?v=5" />
+    <script defer src="/assets/app.js?v=5"></script>
+    <script defer src="/assets/pages/queue-control.js?v=5"></script>
+  </head>
+  <body data-page="queue-control">
+    <div id="app-header"></div>
+    <main class="page-shell">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">ALAGAQ STAFF TERMINAL</p>
+          <h1>Queue control</h1>
+          <p class="muted">
+            Call, skip, recall, and monitor today’s patient line. Calling a patient sends them an SMS.
+          </p>
+        </div>
+        <a class="button secondary" href="/display.html" target="_blank" rel="noopener">Open public display ↗</a>
+      </div>
+      <div id="toast" class="toast" role="status"></div>
+
+      <section class="terminal-current panel">
+        <p class="eyebrow">CURRENTLY SERVING</p>
+        <strong id="terminal-current-ticket">A---</strong>
+        <div id="terminal-current-patient" class="muted">No patient is being served.</div>
+      </section>
+
+      <section class="terminal-controls panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">STAFF CONTROLS</p>
+            <h2>Manage the queue</h2>
+          </div>
+          <span id="terminal-count" class="pill">0 waiting</span>
+        </div>
+        <div class="terminal-button-group">
+          <button class="button primary" data-queue-action="next">Call next</button>
+          <button class="button secondary" data-queue-action="skip">Skip next</button>
+          <button class="button secondary" data-queue-action="recall">Recall last</button>
+          <button id="reset-queue" class="button danger">Reset today’s queue</button>
+        </div>
+        <p id="reset-confirm" class="terminal-note hidden">
+          Close all of today’s active queue entries? Their appointment and audit history will be retained.
+          <button id="reset-confirm-yes" class="button danger small-button">Yes, reset queue</button>
+          <button id="reset-confirm-no" class="button secondary small-button">Cancel</button>
+        </p>
+        <p class="muted terminal-note">
+          Reset closes active entries as cancelled and keeps their appointment and audit history. Ticket numbers remain
+          unique for the day.
+        </p>
+      </section>
+
+      <section class="panel queue-list-container">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">WAITLIST</p>
+            <h2>Patients in line</h2>
+          </div>
+          <span class="live-indicator">● Refreshes every 2 seconds</span>
+        </div>
+        <div id="terminal-waiting" class="terminal-list"><p class="empty-cell">Loading queue…</p></div>
+      </section>
+    </main>
+  </body>
+</html>

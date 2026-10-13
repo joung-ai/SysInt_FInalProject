@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/assets/alagaq-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Doctor Review · CareLink</title>
+    <link rel="stylesheet" href="/assets/app.css?v=5" />
+    <script defer src="/assets/app.js?v=5"></script>
+    <script defer src="/assets/pages/approval.js?v=5"></script>
+  </head>
+  <body data-page="approval">
+    <div id="app-header"></div>
+    <main class="page-shell">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">DOCTOR WORKSPACE</p>
+          <h1>Review &amp; approval</h1>
+          <p class="muted">Approve, reject, or request a revision. Every decision needs a comment.</p>
+        </div>
+        <span class="pill">Approval triggers patient SMS + email</span>
+      </div>
+      <div id="toast" class="toast" role="status"></div>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">CONSULTATIONS · ASSIGNED TO YOU OR UNASSIGNED</p>
+            <h2>Waiting for review</h2>
+          </div>
+          <button id="refresh-approvals" class="button secondary">Refresh</button>
+        </div>
+        <div id="pending-consultations" class="review-list"><p class="empty-cell">Loading review queue…</p></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">DOCUMENTS</p>
+            <h2>Current file versions awaiting review</h2>
+          </div>
+        </div>
+        <div id="pending-assets" class="review-list"><p class="empty-cell">Loading files…</p></div>
+      </section>
+    </main>
+  </body>
+</html>

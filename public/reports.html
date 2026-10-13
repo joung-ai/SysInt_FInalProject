@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/assets/alagaq-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Reports · CareLink</title>
+    <link rel="stylesheet" href="/assets/app.css?v=5" />
+    <script defer src="/assets/app.js?v=5"></script>
+    <script defer src="/assets/pages/reports.js?v=5"></script>
+  </head>
+  <body data-page="reports">
+    <div id="app-header"></div>
+    <main class="page-shell">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">ANALYTICS</p>
+          <h1>Operations report</h1>
+          <p class="muted">Visit volume, review outcomes, overdue work, and integration health for a date range.</p>
+        </div>
+        <div class="heading-actions">
+          <form id="range-form" class="filter-bar">
+            <label class="compact-label">
+              From
+              <input type="date" name="from" required />
+            </label>
+            <label class="compact-label">
+              To
+              <input type="date" name="to" required />
+            </label>
+            <button class="button secondary" type="submit">Apply</button>
+          </form>
+          <button id="print-report" class="button secondary" type="button">Print</button>
+        </div>
+      </div>
+      <div id="toast" class="toast" role="status"></div>
+
+      <section class="metric-grid" id="report-metrics"></section>
+
+      <div class="report-grid">
+        <section class="panel">
+          <div class="panel-heading"><h2>Appointments by status</h2></div>
+          <div id="appointments-by-status"></div>
+        </section>
+        <section class="panel">
+          <div class="panel-heading"><h2>Consultation outcomes</h2></div>
+          <div id="consultations-by-status"></div>
+        </section>
+        <section class="panel">
+          <div class="panel-heading"><h2>Current file versions</h2></div>
+          <div id="files-by-status"></div>
+        </section>
+        <section class="panel">
+          <div class="panel-heading"><h2>Doctor workload</h2></div>
+          <div id="doctor-workload"></div>
+        </section>
+        <section class="panel">
+          <div class="panel-heading"><h2>Notification delivery</h2></div>
+          <div id="notifications-by-channel"></div>
+        </section>
+        <section class="panel">
+          <div class="panel-heading"><h2>Integration health</h2></div>
+          <div id="integrations-by-status"></div>
+        </section>
+      </div>
+
+      <section class="panel">
+        <div class="panel-heading"><h2>Daily appointment volume</h2></div>
+        <div id="appointments-by-day"></div>
+      </section>
+
+      <div class="report-grid">
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">DEADLINES</p>
+              <h2>Reviews waiting over 24 hours</h2>
+            </div>
+          </div>
+          <div id="overdue-reviews"></div>
+        </section>
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">NO-SHOWS</p>
+              <h2>Booked visits not checked in</h2>
+            </div>
+          </div>
+          <div id="missed-appointments"></div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

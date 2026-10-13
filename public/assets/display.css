@@ -1,0 +1,208 @@
+.display-page {
+  min-height: 100vh;
+  padding: clamp(16px, 3vw, 36px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: #c2f2e4;
+  color: #35524a;
+  font-family: Arial, sans-serif;
+}
+.display-header {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+.display-brand img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+.display-brand span {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+.display-brand small {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: #64786d;
+}
+.display-header > div {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #52695e;
+  font-size: 12px;
+  font-weight: 700;
+}
+.display-live {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 11px;
+  background: #edf7be;
+  border: 1px solid #b8c98d;
+  border-radius: 20px;
+}
+.display-live i {
+  width: 8px;
+  height: 8px;
+  background: #4f9866;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(79, 152, 102, 0.12);
+}
+.display-grid {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: minmax(250px, 1fr) auto;
+  gap: 18px;
+}
+.display-card {
+  min-height: 260px;
+  padding: 25px;
+  border: 2px solid #b8c98d;
+  border-radius: 22px;
+  background: #edf7be;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+.display-card .eyebrow {
+  font-size: clamp(14px, 1.7vw, 20px);
+  letter-spacing: 2.5px;
+  margin-bottom: 10px;
+  color: #35524a;
+}
+.display-ticket {
+  display: block;
+  color: #d32f2f;
+  font-size: clamp(72px, 13vw, 170px);
+  line-height: 1;
+  letter-spacing: 4px;
+}
+.display-service {
+  margin: 12px 0 0;
+  color: #52695e;
+  font-size: clamp(13px, 1.5vw, 18px);
+  font-weight: 700;
+}
+.display-waiting {
+  grid-column: 1/-1;
+  padding: 20px 24px;
+  border: 1px solid #b8c98d;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.07);
+}
+.display-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 12px;
+}
+.display-section-heading h1 {
+  font-size: 22px;
+  margin: 0;
+}
+.display-register-link {
+  padding: 9px 13px;
+  border-radius: 10px;
+  background: #edf7be;
+  color: #35524a;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid #b8c98d;
+}
+.display-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.display-list li {
+  min-width: 0;
+}
+.display-waiting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: #f8fbed;
+  border: 1px solid #d8e2bd;
+  border-radius: 10px;
+}
+.display-waiting-item strong {
+  color: #d32f2f;
+  font-size: 19px;
+}
+.display-waiting-item span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #52695e;
+  font-size: 11px;
+}
+.display-empty {
+  grid-column: 1/-1;
+  padding: 14px;
+  color: #718278;
+  text-align: center;
+}
+.display-footer {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: #52695e;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+@media (max-width: 700px) {
+  .display-page {
+    padding: 13px;
+    gap: 12px;
+  }
+  .display-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+  .display-card {
+    min-height: 180px;
+    padding: 18px;
+  }
+  .display-ticket {
+    font-size: clamp(70px, 22vw, 120px);
+  }
+  .display-waiting {
+    grid-column: auto;
+    padding: 16px;
+  }
+  .display-list {
+    grid-template-columns: 1fr 1fr;
+  }
+  .display-footer {
+    flex-direction: column;
+    text-align: center;
+  }
+}

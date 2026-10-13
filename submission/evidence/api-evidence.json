@@ -1,0 +1,715 @@
+{
+  "csvImport": {
+    "request": {
+      "method": "POST",
+      "url": "/api/integrations/appointments/import",
+      "body": {
+        "filename": "appointments-import.csv",
+        "csv": "<file contents>"
+      }
+    },
+    "response": {
+      "transaction_id": "7226afca-481d-47d9-b539-d1af42c785bd",
+      "status": "partial",
+      "total": 7,
+      "imported": 3,
+      "skipped": 1,
+      "failed": 3,
+      "rows": [
+        {
+          "row": 2,
+          "status": "imported",
+          "appointment_id": 7,
+          "queue_number": 1
+        },
+        {
+          "row": 3,
+          "status": "imported",
+          "appointment_id": 8,
+          "queue_number": 2
+        },
+        {
+          "row": 4,
+          "status": "imported",
+          "appointment_id": 9,
+          "queue_number": 3
+        },
+        {
+          "row": 5,
+          "status": "skipped",
+          "message": "Duplicate of an earlier row in this file"
+        },
+        {
+          "row": 6,
+          "status": "failed",
+          "message": "full_name is missing or not 2-100 characters"
+        },
+        {
+          "row": 7,
+          "status": "failed",
+          "message": "phone is not a valid number; email is not valid; scheduled_at must be YYYY-MM-DD HH:MM or MM/DD/YYYY HH:MM"
+        },
+        {
+          "row": 8,
+          "status": "failed",
+          "message": "Unknown doctor \"doctor9\""
+        }
+      ]
+    }
+  },
+  "approval": {
+    "request": {
+      "method": "POST",
+      "url": "/api/consultations/3/review",
+      "headers": {
+        "Authorization": "Bearer <JWT>"
+      },
+      "body": {
+        "decision": "approved",
+        "comment": "Viral cough. Fluids and rest; return if fever persists."
+      }
+    },
+    "response": {
+      "id": 3,
+      "status": "approved",
+      "sms": "sent",
+      "email": "sent",
+      "transaction_id": "a936df39-b048-4d5c-8a58-35570eef7424"
+    }
+  },
+  "failedApproval": {
+    "request": {
+      "method": "POST",
+      "url": "/api/consultations/4/review",
+      "body": {
+        "decision": "approved",
+        "comment": "Rest and ice; review in one week."
+      }
+    },
+    "response": {
+      "id": 4,
+      "status": "approved",
+      "sms": "failed",
+      "email": null,
+      "transaction_id": "ba52387b-7f13-4d85-99cf-6c351dfe10c4"
+    }
+  },
+  "philhealthExport": {
+    "response": {
+      "transaction_id": "bcbc28b8-c054-4b36-b92d-80ebd3f47df8",
+      "filename": "philhealth-approved-2026-10-13T05-23-43-688Z.csv",
+      "latest": "latest.csv",
+      "records": 2,
+      "path": "server/exports/philhealth/philhealth-approved-2026-10-13T05-23-43-688Z.csv"
+    }
+  },
+  "approvalTrace": [
+    {
+      "id": 8,
+      "transaction_id": "a936df39-b048-4d5c-8a58-35570eef7424",
+      "integration": "email_gateway",
+      "action": "consultation_approved",
+      "status": "success",
+      "record_ref": "3",
+      "payload_json": "{\"to\":\"morgan@example.test\",\"eventType\":\"consultation_approved\"}",
+      "error_message": null,
+      "created_at": "2026-10-13 05:23:43"
+    },
+    {
+      "id": 7,
+      "transaction_id": "a936df39-b048-4d5c-8a58-35570eef7424",
+      "integration": "sms_gateway",
+      "action": "consultation_approved",
+      "status": "success",
+      "record_ref": "3",
+      "payload_json": "{\"to\":\"+639171110003\",\"eventType\":\"consultation_approved\"}",
+      "error_message": null,
+      "created_at": "2026-10-13 05:23:43"
+    },
+    {
+      "id": 6,
+      "transaction_id": "a936df39-b048-4d5c-8a58-35570eef7424",
+      "integration": "event_bus",
+      "action": "consultation.approved",
+      "status": "success",
+      "record_ref": "consultation:3",
+      "payload_json": "{\"recordId\":3,\"recordRef\":\"consultation:3\",\"patientId\":3,\"patientName\":\"Morgan Lee\",\"comment\":\"Viral cough. Fluids and rest; return if fever persists.\"}",
+      "error_message": null,
+      "created_at": "2026-10-13 05:23:43"
+    }
+  ],
+  "failedTrace": [
+    {
+      "id": 12,
+      "transaction_id": "ba52387b-7f13-4d85-99cf-6c351dfe10c4",
+      "integration": "sms_gateway",
+      "action": "consultation_approved",
+      "status": "failed",
+      "record_ref": "4",
+      "payload_json": "{\"to\":null,\"eventType\":\"consultation_approved\"}",
+      "error_message": "Patient phone number is not on file.",
+      "created_at": "2026-10-13 05:23:43"
+    },
+    {
+      "id": 11,
+      "transaction_id": "ba52387b-7f13-4d85-99cf-6c351dfe10c4",
+      "integration": "event_bus",
+      "action": "consultation.approved",
+      "status": "success",
+      "record_ref": "consultation:4",
+      "payload_json": "{\"recordId\":4,\"recordRef\":\"consultation:4\",\"patientId\":5,\"patientName\":\"Sam Villanueva\",\"comment\":\"Rest and ice; review in one week.\"}",
+      "error_message": null,
+      "created_at": "2026-10-13 05:23:43"
+    }
+  ],
+  "integrationLog": [
+    {
+      "id": 15,
+      "transaction_id": "51083259-75e7-4f93-82dc-d80cc6ccf94e",
+      "integration": "sms_gateway",
+      "action": "queue_patient_called",
+      "status": "success",
+      "record_ref": "1",
+      "payload_json": "{\"to\":\"+639171110001\",\"eventType\":\"queue_patient_called\"}",
+      "error_message": null,
+      "created_at": "2026-10-13 05:23:43"
+    },
+    {
+      "id": 14,
+      "transaction_id": "bcbc28b8-c054-4b36-b92d-80ebd3f47df8",
+      "integration": "philhealth_export",
+      "action": "approved_consultations_export",
+      "status": "success",
+      "record_ref": "philhealth-approved-2026-10-13T05-23-43-688Z.csv",
+      "payload_json": "{\"records\":2}",
+      "error_message": null,
+      "created_at": "2026-10-13 05:23:43"
+    },
+    {
+      "id": 13,
+      "transaction_id": "51083259-75e7-4f93-82dc-d80cc6ccf94e",
+      "integration": "event_bus",
+      "action": "queue.patient_called",
+      "status": "success",
+      "record_ref": "appointment:1",
+      "payload_json": "{\"recordId\":1,\"recordRef\":\"appointment:1\",\"patientId\":1,\"ticket\":\"A001\",\"hasPhone\":true}",
+      "error_message": null,
+      "created_at": "2026-10-13 05:23:43"
+    },
+    {
+      "id": 12,
+      "transaction_id": "ba52387b-7f13-4d85-99cf-6c351dfe10c4",
+      "integration": "sms_gateway",
+      "action": "consultation_approved",
+      "status": "failed",
+      "record_ref": "4",
+      "payload_json": "{\"to\":null,\"eventType\":\"consultation_approved\"}",
+      "error_message": "Patient phone number is not on file.",
+      "created_at": "2026-10-13 05:23:43"
+    },
+    {
+      "id": 11,
+      "transaction_id": "ba52387b-7f13-4d85-99cf-6c351dfe10c4",
+      "integration": "event_bus",
+      "action": "consultation.approved",
+      "status": "success",
+      "record_ref": "consultation:4",
+      "payload_json": "{\"recordId\":4,\"recordRef\":\"consultation:4\",\"patientId\":5,\"patientName\":\"Sam Villanueva\",\"comment\":\"Rest and ice; review in one week.\"}",
+      "error_message": null,
+      "created_at": "2026-10-13 05:23:43"
+    },
+    {
+      "id": 10,
+      "transaction_id": "bcf132d9-7712-4063-8451-fba0dffd9a31",
+      "integration": "event_bus",
+      "action": "consultation.submitted",
+      "status": "success",
+      "record_ref": "consultation:4",
+      "payload_json": "{\"recordId\":4,\"recordRef\":\"consultation:4\",\"patientId\":5,\"patientName\":\"Sam Villanueva\"}",
+      "error_message": null,
+      "created_at": "2026-10-13 05:23:43"
+    },
+    {
+      "id": 9,
+      "transaction_id": "04075484-d0ef-497a-892d-0aeca3bad16f",
+      "integration": "event_bus",
+      "action": "comment.added",
+      "status": "success",
+      "record_ref": "asset:1",
+      "payload_json": "{\"recordId\":1,\"recordRef\":\"asset:1\",\"patientId\":1,\"entityType\":\"asset\",\"authorRole\":\"Patient\",\"body\":\"Could the doctor confirm whether I need to fast for the next test?\"}",
+      "error_message": null,
+      "created_at": "2026-10-13 05:23:43"
+    },
+    {
+      "id": 8,
+      "transaction_id": "a936df39-b048-4d5c-8a58-35570eef7424",
+      "integration": "email_gateway",
+      "action": "consultation_approved",
+      "status": "success",
+      "record_ref": "3",
+      "payload_json": "{\"to\":\"morgan@example.test\",\"eventType\":\"consultation_approved\"}",
+      "error_message": null,
+      "created_at": "2026-10-13 05:23:43"
+    },
+    {
+      "id": 7,
+      "transaction_id": "a936df39-b048-4d5c-8a58-35570eef7424",
+      "integration": "sms_gateway",
+      "action": "consultation_approved",
+      "status": "success",
+      "record_ref": "3",
+      "payload_json": "{\"to\":\"+639171110003\",\"eventType\":\"consultation_approved\"}",
+      "error_message": null,
+      "created_at": "2026-10-13 05:23:43"
+    },
+    {
+      "id": 6,
+      "transaction_id": "a936df39-b048-4d5c-8a58-35570eef7424",
+      "integration": "event_bus",
+      "action": "consultation.approved",
+      "status": "success",
+      "record_ref": "consultation:3",
+      "payload_json": "{\"recordId\":3,\"recordRef\":\"consultation:3\",\"patientId\":3,\"patientName\":\"Morgan Lee\",\"comment\":\"Viral cough. Fluids and rest; return if fever persists.\"}",
+      "error_message": null,
+      "created_at": "2026-10-13 05:23:43"
+    },
+    {
+      "id": 5,
+      "transaction_id": "d17227c6-a77d-473e-b9f1-bb1f9c6d36d7",
+      "integration": "event_bus",
+      "action": "consultation.submitted",
+      "status": "success",
+      "record_ref": "consultation:3",
+      "payload_json": "{\"recordId\":3,\"recordRef\":\"consultation:3\",\"patientId\":3,\"patientName\":\"Morgan Lee\"}",
+      "error_message": null,
+      "created_at": "2026-10-13 05:23:43"
+    },
+    {
+      "id": 4,
+      "transaction_id": "7226afca-481d-47d9-b539-d1af42c785bd",
+      "integration": "csv_import",
+      "action": "appointments_import",
+      "status": "partial",
+      "record_ref": "appointments-import.csv",
+      "payload_json": "{\"filename\":\"appointments-import.csv\",\"total\":7,\"imported\":3,\"skipped\":1,\"failed\":3}",
+      "error_message": "3 row(s) rejected",
+      "created_at": "2026-10-13 05:23:43"
+    },
+    {
+      "id": 3,
+      "transaction_id": "7226afca-481d-47d9-b539-d1af42c785bd",
+      "integration": "csv_import",
+      "action": "row_rejected",
+      "status": "failed",
+      "record_ref": "appointments-import.csv#row8",
+      "payload_json": "{\"row\":8}",
+      "error_message": "Unknown doctor \"doctor9\"",
+      "created_at": "2026-10-13 05:23:43"
+    },
+    {
+      "id": 2,
+      "transaction_id": "7226afca-481d-47d9-b539-d1af42c785bd",
+      "integration": "csv_import",
+      "action": "row_rejected",
+      "status": "failed",
+      "record_ref": "appointments-import.csv#row7",
+      "payload_json": "{\"row\":7}",
+      "error_message": "phone is not a valid number; email is not valid; scheduled_at must be YYYY-MM-DD HH:MM or MM/DD/YYYY HH:MM",
+      "created_at": "2026-10-13 05:23:43"
+    },
+    {
+      "id": 1,
+      "transaction_id": "7226afca-481d-47d9-b539-d1af42c785bd",
+      "integration": "csv_import",
+      "action": "row_rejected",
+      "status": "failed",
+      "record_ref": "appointments-import.csv#row6",
+      "payload_json": "{\"row\":6}",
+      "error_message": "full_name is missing or not 2-100 characters",
+      "created_at": "2026-10-13 05:23:43"
+    }
+  ],
+  "notifications": [
+    {
+      "id": 11,
+      "patient_id": 1,
+      "channel": "sms",
+      "event_type": "queue_patient_called",
+      "message": "Hello Jamie Santos, ticket A001 is now being served. Please proceed to the consultation room.",
+      "destination": "+639171110001",
+      "status": "sent",
+      "response_body": "{\"accepted\":true,\"provider\":\"local-sms-mock\",\"message_id\":\"e0a75748-f999-40be-aa69-5a69c6536059\"}",
+      "recipient_role": "Patient",
+      "transaction_id": "51083259-75e7-4f93-82dc-d80cc6ccf94e",
+      "created_at": "2026-10-13 05:23:43"
+    },
+    {
+      "id": 10,
+      "patient_id": null,
+      "channel": "system",
+      "event_type": "philhealth_export",
+      "message": "PhilHealth CSV export created with 2 approved records.",
+      "destination": null,
+      "status": "system",
+      "response_body": "philhealth-approved-2026-10-13T05-23-43-688Z.csv",
+      "recipient_role": null,
+      "transaction_id": "bcbc28b8-c054-4b36-b92d-80ebd3f47df8",
+      "created_at": "2026-10-13 05:23:43"
+    },
+    {
+      "id": 9,
+      "patient_id": 5,
+      "channel": "sms",
+      "event_type": "consultation_approved",
+      "message": "Hello Sam Villanueva, your consultation (record 4) has been approved by your care team.",
+      "destination": null,
+      "status": "failed",
+      "response_body": "Patient phone number is not on file.",
+      "recipient_role": "Patient",
+      "transaction_id": "ba52387b-7f13-4d85-99cf-6c351dfe10c4",
+      "created_at": "2026-10-13 05:23:43"
+    },
+    {
+      "id": 8,
+      "patient_id": 5,
+      "channel": "in_app",
+      "event_type": "consultation_submitted",
+      "message": "Consultation #4 for Sam Villanueva is waiting for review.",
+      "destination": "role:Doctor",
+      "status": "sent",
+      "response_body": "",
+      "recipient_role": "Doctor",
+      "transaction_id": "bcf132d9-7712-4063-8451-fba0dffd9a31",
+      "created_at": "2026-10-13 05:23:43"
+    },
+    {
+      "id": 7,
+      "patient_id": 1,
+      "channel": "in_app",
+      "event_type": "comment_added",
+      "message": "Patient feedback on asset #1: Could the doctor confirm whether I need to fast for the next test?",
+      "destination": "role:Clinic Staff",
+      "status": "sent",
+      "response_body": "",
+      "recipient_role": "Clinic Staff",
+      "transaction_id": "04075484-d0ef-497a-892d-0aeca3bad16f",
+      "created_at": "2026-10-13 05:23:43"
+    },
+    {
+      "id": 6,
+      "patient_id": 3,
+      "channel": "email",
+      "event_type": "consultation_approved",
+      "message": "Hello Morgan Lee, your consultation (record 3) has been approved by your care team.",
+      "destination": "morgan@example.test",
+      "status": "sent",
+      "response_body": "{\"accepted\":true,\"provider\":\"local-email-mock\",\"message_id\":\"b2996c61-97a9-488c-969a-e0432d20e37b\"}",
+      "recipient_role": "Patient",
+      "transaction_id": "a936df39-b048-4d5c-8a58-35570eef7424",
+      "created_at": "2026-10-13 05:23:43"
+    },
+    {
+      "id": 5,
+      "patient_id": 3,
+      "channel": "sms",
+      "event_type": "consultation_approved",
+      "message": "Hello Morgan Lee, your consultation (record 3) has been approved by your care team.",
+      "destination": "+639171110003",
+      "status": "sent",
+      "response_body": "{\"accepted\":true,\"provider\":\"local-sms-mock\",\"message_id\":\"9370ec09-26c7-4d44-9b80-860a35fa8294\"}",
+      "recipient_role": "Patient",
+      "transaction_id": "a936df39-b048-4d5c-8a58-35570eef7424",
+      "created_at": "2026-10-13 05:23:43"
+    },
+    {
+      "id": 4,
+      "patient_id": 3,
+      "channel": "in_app",
+      "event_type": "consultation_submitted",
+      "message": "Consultation #3 for Morgan Lee is waiting for review.",
+      "destination": "role:Doctor",
+      "status": "sent",
+      "response_body": "",
+      "recipient_role": "Doctor",
+      "transaction_id": "d17227c6-a77d-473e-b9f1-bb1f9c6d36d7",
+      "created_at": "2026-10-13 05:23:43"
+    },
+    {
+      "id": 3,
+      "patient_id": null,
+      "channel": "system",
+      "event_type": "csv_import",
+      "message": "CSV import appointments-import.csv: 3 imported, 1 skipped, 3 rejected.",
+      "destination": null,
+      "status": "system",
+      "response_body": "",
+      "recipient_role": "Clinic Staff",
+      "transaction_id": "7226afca-481d-47d9-b539-d1af42c785bd",
+      "created_at": "2026-10-13 05:23:43"
+    },
+    {
+      "id": 2,
+      "patient_id": 6,
+      "channel": "system",
+      "event_type": "queue_ticket_created",
+      "message": "Queue ticket A006 created for Checkup.",
+      "destination": null,
+      "status": "system",
+      "response_body": "",
+      "recipient_role": null,
+      "transaction_id": null,
+      "created_at": "2026-10-13 05:23:43"
+    },
+    {
+      "id": 1,
+      "patient_id": null,
+      "channel": "system",
+      "event_type": "seed_ready",
+      "message": "Demo records and role accounts are ready.",
+      "destination": null,
+      "status": "system",
+      "response_body": "Seed script",
+      "recipient_role": null,
+      "transaction_id": null,
+      "created_at": "2026-10-13 05:23:42"
+    }
+  ],
+  "audit": [
+    {
+      "id": 17,
+      "actor_id": null,
+      "actor_role": "System",
+      "action": "sms_triggered",
+      "entity_type": "notification",
+      "entity_id": "1",
+      "details_json": "{\"status\":\"sent\",\"eventType\":\"queue_patient_called\",\"transactionId\":\"51083259-75e7-4f93-82dc-d80cc6ccf94e\"}",
+      "ip_address": null,
+      "created_at": "2026-10-13 05:23:43",
+      "username": null,
+      "display_name": null
+    },
+    {
+      "id": 16,
+      "actor_id": 1,
+      "actor_role": "Admin",
+      "action": "philhealth_export_created",
+      "entity_type": "export",
+      "entity_id": "philhealth-approved-2026-10-13T05-23-43-688Z.csv",
+      "details_json": "{\"records\":2,\"transaction_id\":\"bcbc28b8-c054-4b36-b92d-80ebd3f47df8\"}",
+      "ip_address": "::ffff:127.0.0.1",
+      "created_at": "2026-10-13 05:23:43",
+      "username": "admin",
+      "display_name": "System Administrator"
+    },
+    {
+      "id": 15,
+      "actor_id": 4,
+      "actor_role": "Clinic Staff",
+      "action": "queue_patient_called",
+      "entity_type": "appointment",
+      "entity_id": "1",
+      "details_json": "{\"queue_number\":1}",
+      "ip_address": "::ffff:127.0.0.1",
+      "created_at": "2026-10-13 05:23:43",
+      "username": "clinic1",
+      "display_name": "Casey Clinic Staff"
+    },
+    {
+      "id": 14,
+      "actor_id": null,
+      "actor_role": "System",
+      "action": "sms_triggered",
+      "entity_type": "notification",
+      "entity_id": "4",
+      "details_json": "{\"status\":\"failed\",\"eventType\":\"consultation_approved\",\"transactionId\":\"ba52387b-7f13-4d85-99cf-6c351dfe10c4\"}",
+      "ip_address": null,
+      "created_at": "2026-10-13 05:23:43",
+      "username": null,
+      "display_name": null
+    },
+    {
+      "id": 13,
+      "actor_id": 2,
+      "actor_role": "Doctor",
+      "action": "consultation_approved",
+      "entity_type": "consultation",
+      "entity_id": "4",
+      "details_json": "{\"comment\":\"Rest and ice; review in one week.\",\"revision\":1}",
+      "ip_address": "::ffff:127.0.0.1",
+      "created_at": "2026-10-13 05:23:43",
+      "username": "doctor1",
+      "display_name": "Dr. Taylor Cruz"
+    },
+    {
+      "id": 12,
+      "actor_id": 4,
+      "actor_role": "Clinic Staff",
+      "action": "consultation_submitted",
+      "entity_type": "consultation",
+      "entity_id": "4",
+      "details_json": "{\"appointment_id\":5}",
+      "ip_address": "::ffff:127.0.0.1",
+      "created_at": "2026-10-13 05:23:43",
+      "username": "clinic1",
+      "display_name": "Casey Clinic Staff"
+    },
+    {
+      "id": 11,
+      "actor_id": 4,
+      "actor_role": "Clinic Staff",
+      "action": "appointment_status_changed",
+      "entity_type": "appointment",
+      "entity_id": "5",
+      "details_json": "{\"from\":\"booked\",\"to\":\"checked_in\"}",
+      "ip_address": "::ffff:127.0.0.1",
+      "created_at": "2026-10-13 05:23:43",
+      "username": "clinic1",
+      "display_name": "Casey Clinic Staff"
+    },
+    {
+      "id": 10,
+      "actor_id": 5,
+      "actor_role": "Patient",
+      "action": "comment_added",
+      "entity_type": "asset",
+      "entity_id": "1",
+      "details_json": "{\"comment_id\":4}",
+      "ip_address": "::ffff:127.0.0.1",
+      "created_at": "2026-10-13 05:23:43",
+      "username": "patient1",
+      "display_name": "Jamie Santos"
+    },
+    {
+      "id": 9,
+      "actor_id": null,
+      "actor_role": "System",
+      "action": "sms_triggered",
+      "entity_type": "notification",
+      "entity_id": "3",
+      "details_json": "{\"status\":\"sent\",\"eventType\":\"consultation_approved\",\"transactionId\":\"a936df39-b048-4d5c-8a58-35570eef7424\"}",
+      "ip_address": null,
+      "created_at": "2026-10-13 05:23:43",
+      "username": null,
+      "display_name": null
+    },
+    {
+      "id": 8,
+      "actor_id": 2,
+      "actor_role": "Doctor",
+      "action": "consultation_approved",
+      "entity_type": "consultation",
+      "entity_id": "3",
+      "details_json": "{\"comment\":\"Viral cough. Fluids and rest; return if fever persists.\",\"revision\":1}",
+      "ip_address": "::ffff:127.0.0.1",
+      "created_at": "2026-10-13 05:23:43",
+      "username": "doctor1",
+      "display_name": "Dr. Taylor Cruz"
+    },
+    {
+      "id": 7,
+      "actor_id": 4,
+      "actor_role": "Clinic Staff",
+      "action": "consultation_submitted",
+      "entity_type": "consultation",
+      "entity_id": "3",
+      "details_json": "{\"appointment_id\":3}",
+      "ip_address": "::ffff:127.0.0.1",
+      "created_at": "2026-10-13 05:23:43",
+      "username": "clinic1",
+      "display_name": "Casey Clinic Staff"
+    },
+    {
+      "id": 6,
+      "actor_id": 4,
+      "actor_role": "Clinic Staff",
+      "action": "csv_import_completed",
+      "entity_type": "integration",
+      "entity_id": "7226afca-481d-47d9-b539-d1af42c785bd",
+      "details_json": "{\"filename\":\"appointments-import.csv\",\"total\":7,\"imported\":3,\"skipped\":1,\"failed\":3}",
+      "ip_address": "::ffff:127.0.0.1",
+      "created_at": "2026-10-13 05:23:43",
+      "username": "clinic1",
+      "display_name": "Casey Clinic Staff"
+    },
+    {
+      "id": 5,
+      "actor_id": null,
+      "actor_role": "System",
+      "action": "public_queue_ticket_created",
+      "entity_type": "appointment",
+      "entity_id": "6",
+      "details_json": "{\"patient_id\":6,\"queue_number\":6,\"queue_order\":6,\"service\":\"Checkup\"}",
+      "ip_address": "::ffff:127.0.0.1",
+      "created_at": "2026-10-13 05:23:43",
+      "username": null,
+      "display_name": null
+    },
+    {
+      "id": 4,
+      "actor_id": 5,
+      "actor_role": "Patient",
+      "action": "login",
+      "entity_type": "session",
+      "entity_id": "5",
+      "details_json": "{}",
+      "ip_address": "::ffff:127.0.0.1",
+      "created_at": "2026-10-13 05:23:43",
+      "username": "patient1",
+      "display_name": "Jamie Santos"
+    },
+    {
+      "id": 3,
+      "actor_id": 4,
+      "actor_role": "Clinic Staff",
+      "action": "login",
+      "entity_type": "session",
+      "entity_id": "4",
+      "details_json": "{}",
+      "ip_address": "::ffff:127.0.0.1",
+      "created_at": "2026-10-13 05:23:43",
+      "username": "clinic1",
+      "display_name": "Casey Clinic Staff"
+    },
+    {
+      "id": 2,
+      "actor_id": 2,
+      "actor_role": "Doctor",
+      "action": "login",
+      "entity_type": "session",
+      "entity_id": "2",
+      "details_json": "{}",
+      "ip_address": "::ffff:127.0.0.1",
+      "created_at": "2026-10-13 05:23:43",
+      "username": "doctor1",
+      "display_name": "Dr. Taylor Cruz"
+    },
+    {
+      "id": 1,
+      "actor_id": 1,
+      "actor_role": "Admin",
+      "action": "login",
+      "entity_type": "session",
+      "entity_id": "1",
+      "details_json": "{}",
+      "ip_address": "::ffff:127.0.0.1",
+      "created_at": "2026-10-13 05:23:43",
+      "username": "admin",
+      "display_name": "System Administrator"
+    }
+  ],
+  "unauthorized": {
+    "patientReadsAudit": {
+      "status": 403,
+      "body": {
+        "error": "Your role cannot perform this action."
+      }
+    },
+    "noToken": {
+      "status": 401,
+      "body": {
+        "error": "Authentication required."
+      }
+    }
+  },
+  "latestCsv": "\"consultation_id\",\"patient_mrn\",\"patient_name\",\"date_of_birth\",\"phone\",\"appointment_datetime\",\"symptoms\",\"clinical_notes\",\"doctor_comment\",\"approved_at\"\r\n\"3\",\"MRN-10003\",\"Morgan Lee\",\"1993-07-24\",\"+639171110003\",\"2026-10-13T10:00\",\"Persistent dry cough for one week.\",\"Temp 37.4 °C. No known allergies.\",\"Viral cough. Fluids and rest; return if fever persists.\",\"2026-10-13 05:23:43\"\r\n\"4\",\"MRN-10005\",\"Sam Villanueva\",\"1969-09-30\",\"\",\"2026-10-13T15:00\",\"Knee pain after a fall.\",\"No swelling.\",\"Rest and ice; review in one week.\",\"2026-10-13 05:23:43\"\r\n"
+}

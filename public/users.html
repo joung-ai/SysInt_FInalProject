@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/assets/alagaq-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>User Management · CareLink</title>
+    <link rel="stylesheet" href="/assets/app.css?v=5" />
+    <script defer src="/assets/app.js?v=5"></script>
+    <script defer src="/assets/pages/users.js?v=5"></script>
+  </head>
+  <body data-page="users">
+    <div id="app-header"></div>
+    <main class="page-shell">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">ACCESS CONTROL</p>
+          <h1>User management</h1>
+          <p class="muted">Create role-based accounts, link patient users to their record, and deactivate access.</p>
+        </div>
+        <span class="pill">Admin only</span>
+      </div>
+      <div id="toast" class="toast" role="status"></div>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">NEW ACCOUNT</p>
+            <h2>Create a team or patient account</h2>
+          </div>
+        </div>
+        <form id="user-form" class="inline-form">
+          <label>
+            Display name
+            <input name="display_name" autocomplete="name" required />
+          </label>
+          <label>
+            Username
+            <input name="username" minlength="3" autocomplete="off" required />
+          </label>
+          <label>
+            Temporary password
+            <input name="password" type="password" minlength="8" autocomplete="new-password" required />
+          </label>
+          <label>
+            Role
+            <select id="user-role" name="role" required>
+              <option value="Doctor">Doctor</option>
+              <option value="Clinic Staff">Clinic Staff</option>
+              <option value="Admin">Admin</option>
+              <option value="Patient">Patient</option>
+            </select>
+          </label>
+          <label id="user-patient-field" class="hidden">
+            Linked patient record
+            <select id="user-patient" name="patient_id"></select>
+          </label>
+          <button class="button primary" type="submit">Create account</button>
+        </form>
+        <p id="user-result" class="form-message" aria-live="polite"></p>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">REGISTERED ACCOUNTS</p>
+            <h2>Role directory</h2>
+          </div>
+          <button id="refresh-users" class="button secondary">Refresh</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name and username</th>
+                <th>Role</th>
+                <th>Patient link</th>
+                <th>Status</th>
+                <th>Created</th>
+                <th>Access</th>
+              </tr>
+            </thead>
+            <tbody id="user-rows">
+              <tr><td colspan="6" class="empty-cell">Loading accounts…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

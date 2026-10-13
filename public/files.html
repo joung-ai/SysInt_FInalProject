@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/assets/alagaq-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Patient Files · CareLink</title>
+    <link rel="stylesheet" href="/assets/app.css?v=5" />
+    <script defer src="/assets/app.js?v=5"></script>
+    <script defer src="/assets/pages/files.js?v=5"></script>
+  </head>
+  <body data-page="files">
+    <div id="app-header"></div>
+    <main class="page-shell">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">RECORDS &amp; DOCUMENTS</p>
+          <h1>Patient files</h1>
+          <p class="muted">Upload a lab result or prescription, then keep every revision linked to its history.</p>
+        </div>
+        <span class="pill">PDF · PNG · JPEG · Up to 10 MB</span>
+      </div>
+      <div id="toast" class="toast" role="status"></div>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">FILE SUBMISSION</p>
+            <h2>Upload a file or add a revision</h2>
+          </div>
+        </div>
+        <form id="file-form" class="inline-form">
+          <label class="patient-field">
+            Patient
+            <select name="patient_id" id="file-patient" required></select>
+          </label>
+          <label>
+            Category
+            <select name="category">
+              <option>Lab result</option>
+              <option>Prescription</option>
+              <option>Imaging</option>
+              <option>Referral</option>
+              <option>Medical certificate</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label>
+            Existing file ID
+            <span class="optional">(blank = new file)</span>
+            <input name="asset_id" id="file-asset-id" type="number" min="1" placeholder="e.g. 2" />
+          </label>
+          <label>
+            Choose file
+            <input
+              name="file"
+              type="file"
+              accept=".pdf,.png,.jpg,.jpeg,application/pdf,image/png,image/jpeg"
+              required
+            />
+          </label>
+          <button class="button primary" type="submit">Upload version</button>
+        </form>
+        <p id="file-result" class="form-message"></p>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">VERSION HISTORY</p>
+            <h2>Uploaded files</h2>
+          </div>
+          <button id="refresh-files" class="button secondary">Refresh</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>File</th>
+                <th>Patient</th>
+                <th>Name</th>
+                <th>Version</th>
+                <th>Status</th>
+                <th>Review comment</th>
+                <th>Uploaded</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="file-rows">
+              <tr><td colspan="8" class="empty-cell">Loading files…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

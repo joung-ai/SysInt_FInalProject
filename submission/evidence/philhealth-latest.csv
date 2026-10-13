@@ -1,0 +1,3 @@
+"consultation_id","patient_mrn","patient_name","date_of_birth","phone","appointment_datetime","symptoms","clinical_notes","doctor_comment","approved_at"
+"3","MRN-10003","Morgan Lee","1993-07-24","+639171110003","2026-10-13T10:00","Persistent dry cough for one week.","Temp 37.4 °C. No known allergies.","Viral cough. Fluids and rest; return if fever persists.","2026-10-13 05:23:43"
+"4","MRN-10005","Sam Villanueva","1969-09-30","","2026-10-13T15:00","Knee pain after a fall.","No swelling.","Rest and ice; review in one week.","2026-10-13 05:23:43"

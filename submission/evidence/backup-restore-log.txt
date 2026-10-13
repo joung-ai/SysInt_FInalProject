@@ -1,0 +1,27 @@
+# Backup and recovery evidence (isolated demo database, 2026-10-13 13:24)
+
+$ node src/backup.js create <backup-dir>
+Backup created: <scratch>/backup-demo
+
+$ cat <backup-dir>/manifest.json
+{
+  "created_at": "2026-10-13T05:24:53.522Z",
+  "source_database": "<demo>/demo.sqlite",
+  "integrity_check": "ok",
+  "patient_records": 9,
+  "includes": [
+    "healthcare.sqlite",
+    "uploads/",
+    "exports/philhealth/"
+  ]
+}
+
+# Simulated failure: the live database file is deleted
+patients before failure: 9
+ls: cannot access '<demo>/demo.sqlite': No such file or directory
+
+$ node src/backup.js restore <backup-dir>
+Backup restored to <demo>/demo.sqlite
+Previous runtime folder retained at <demo>/uploads.pre-restore-2026-10-13T05-24-53-890Z
+Previous runtime folder retained at <demo>/exports.pre-restore-2026-10-13T05-24-53-890Z
+patients after restore: 9 | approved consultations: 2 | integrity_check: ok

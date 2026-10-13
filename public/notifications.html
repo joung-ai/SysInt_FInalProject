@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/assets/alagaq-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Notifications · CareLink</title>
+    <link rel="stylesheet" href="/assets/app.css?v=5" />
+    <script defer src="/assets/app.js?v=5"></script>
+    <script defer src="/assets/pages/notifications.js?v=5"></script>
+  </head>
+  <body data-page="notifications">
+    <div id="app-header"></div>
+    <main class="page-shell">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">SYSTEM EVENTS</p>
+          <h1>Notification log</h1>
+          <p class="muted" id="notification-scope">Alerts and deliveries addressed to you.</p>
+        </div>
+        <span class="pill">SMS · Email · In-app · System</span>
+      </div>
+      <div id="toast" class="toast" role="status"></div>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">DELIVERY HISTORY</p>
+            <h2>Alerts &amp; events</h2>
+          </div>
+          <div class="filter-bar">
+            <label class="compact-label">
+              Channel
+              <select id="channel-filter">
+                <option value="">All</option>
+                <option value="sms">SMS</option>
+                <option value="email">Email</option>
+                <option value="in_app">In-app</option>
+                <option value="system">System</option>
+              </select>
+            </label>
+            <button id="refresh-notifications" class="button secondary">Refresh</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Channel</th>
+                <th>Event</th>
+                <th>Message</th>
+                <th>Recipient</th>
+                <th>Status</th>
+                <th>Gateway response</th>
+              </tr>
+            </thead>
+            <tbody id="notification-rows">
+              <tr><td colspan="7" class="empty-cell">Loading notifications…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

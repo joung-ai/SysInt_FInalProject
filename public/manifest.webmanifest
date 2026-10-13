@@ -1,0 +1,10 @@
+{
+  "name": "AlagaQ Patient Queue",
+  "short_name": "AlagaQ",
+  "description": "Get a clinic queue ticket and follow the live queue display.",
+  "start_url": "/register.html",
+  "display": "standalone",
+  "background_color": "#c2f2e4",
+  "theme_color": "#547a67",
+  "icons": [{ "src": "/assets/alagaq-logo.png", "sizes": "523x477", "type": "image/png", "purpose": "any" }]
+}

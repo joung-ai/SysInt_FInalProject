@@ -1,0 +1,8 @@
+patient_mrn,full_name,phone,email,scheduled_at,reason,doctor_username
+MRN-20001,  Dana   Cruz ,0917 222 0001,DANA@example.test,2026-12-01 09:00,Annual checkup,doctor1
+MRN-20002,Lee Navarro,+639172220002,lee@example.test,12/01/2026 9:30,Vaccination - flu,doctor2
+,Pat Ramos,0917-222-0003,,2026-12-01T10:00,"Follow-up, blood pressure",
+MRN-20001,Dana Cruz,09172220001,dana@example.test,2026-12-01 09:00,Annual checkup,doctor1
+MRN-20004,,0917 222 0004,,2026-12-01 10:30,Laboratory request,
+MRN-20005,Jordan Tan,12345,jordan@invalid,2026-13-45 25:00,Consultation,
+MRN-20006,Casey Uy,09172220006,casey@example.test,2026-12-01 11:00,Referral review,doctor9

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/assets/alagaq-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard · CareLink</title>
+    <link rel="stylesheet" href="/assets/app.css?v=5" />
+    <script defer src="/assets/app.js?v=5"></script>
+    <script defer src="/assets/pages/dashboard.js?v=5"></script>
+  </head>
+  <body data-page="dashboard">
+    <div id="app-header"></div>
+    <main class="page-shell">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">OVERVIEW</p>
+          <h1>Clinic dashboard</h1>
+          <p class="muted">A live view of today's appointments, queue and review work.</p>
+        </div>
+        <div class="date-chip" id="today-label"></div>
+      </div>
+      <div id="toast" class="toast" role="status"></div>
+
+      <section class="metric-grid" id="metrics">
+        <div class="metric-card skeleton"></div>
+        <div class="metric-card skeleton"></div>
+        <div class="metric-card skeleton"></div>
+        <div class="metric-card skeleton"></div>
+      </section>
+
+      <div class="content-grid">
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">WORKFLOW</p>
+              <h2>Your tasks</h2>
+            </div>
+          </div>
+          <ul id="task-list" class="task-list"></ul>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">SYSTEM STATUS</p>
+              <h2>Integration services</h2>
+            </div>
+            <span class="live-indicator">● Live</span>
+          </div>
+          <div id="service-status" class="service-list"></div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

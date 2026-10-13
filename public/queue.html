@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/assets/alagaq-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Appointments · CareLink</title>
+    <link rel="stylesheet" href="/assets/app.css?v=5" />
+    <script defer src="/assets/app.js?v=5"></script>
+    <script defer src="/assets/pages/queue.js?v=5"></script>
+  </head>
+  <body data-page="queue">
+    <div id="app-header"></div>
+    <main class="page-shell">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">PATIENT FLOW</p>
+          <h1>Appointments &amp; doctor schedule</h1>
+          <p class="muted">Book a visit, check patients in, and open any visit to see its full record.</p>
+        </div>
+        <div class="heading-actions">
+          <a class="button secondary" href="/register.html">Public registration</a>
+          <a class="button secondary" href="/display.html" target="_blank" rel="noopener">Queue display ↗</a>
+        </div>
+      </div>
+      <div id="toast" class="toast" role="status"></div>
+
+      <section class="panel" id="booking-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">NEW VISIT</p>
+            <h2>Book an appointment</h2>
+          </div>
+          <span class="pill">Queue number assigned automatically</span>
+        </div>
+        <form id="appointment-form" class="inline-form">
+          <label class="patient-field">
+            Patient
+            <select name="patient_id" id="appointment-patient" required></select>
+          </label>
+          <label>
+            Date &amp; time
+            <input name="scheduled_at" type="datetime-local" required />
+          </label>
+          <label>
+            Doctor
+            <select name="doctor_id" id="appointment-doctor">
+              <option value="">Assign later</option>
+            </select>
+          </label>
+          <label class="wide-field">
+            Visit reason
+            <input name="reason" maxlength="240" placeholder="e.g. Follow-up consultation" required />
+          </label>
+          <button class="button primary" type="submit">Book visit</button>
+        </form>
+        <p id="booking-result" class="form-message"></p>
+      </section>
+
+      <section class="panel queue-list-container">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">LIVE WAITLIST · UPDATES EVERY 5 SECONDS</p>
+            <h2>Appointments</h2>
+          </div>
+          <div class="filter-bar">
+            <label class="compact-label">
+              Date
+              <input id="queue-date" type="date" />
+            </label>
+            <label class="compact-label" id="doctor-filter-label">
+              Doctor
+              <select id="doctor-filter">
+                <option value="">All doctors</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Queue</th>
+                <th>Patient</th>
+                <th>Time</th>
+                <th>Doctor</th>
+                <th>Reason</th>
+                <th>Status</th>
+                <th>Record</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="appointment-rows">
+              <tr><td colspan="8" class="empty-cell">Loading appointments…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/assets/alagaq-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Feedback · CareLink</title>
+    <link rel="stylesheet" href="/assets/app.css?v=5" />
+    <script defer src="/assets/app.js?v=5"></script>
+    <script defer src="/assets/pages/comments.js?v=5"></script>
+  </head>
+  <body data-page="comments">
+    <div id="app-header"></div>
+    <main class="page-shell">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">COLLABORATION</p>
+          <h1>Comments &amp; feedback</h1>
+          <p class="muted">Review notes, revision instructions, and patient feedback for each record.</p>
+        </div>
+        <span class="pill">Review decisions are added automatically</span>
+      </div>
+      <div id="toast" class="toast" role="status"></div>
+
+      <div class="split-layout">
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">RECENT ACTIVITY</p>
+              <h2>Discussed records</h2>
+            </div>
+          </div>
+          <div id="record-list" class="record-list"><p class="empty-cell">Loading…</p></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow" id="thread-eyebrow">THREAD</p>
+              <h2 id="thread-title">Choose a record</h2>
+            </div>
+            <span id="thread-status"></span>
+          </div>
+          <div id="thread" class="comment-thread">
+            <p class="empty-cell">
+              Pick a record on the left, or open “Comments” from a file, review card, or visit page.
+            </p>
+          </div>
+          <form id="comment-form" class="stack-form hidden">
+            <label>
+              Add a comment
+              <textarea
+                name="body"
+                maxlength="2000"
+                required
+                placeholder="Write a note or feedback for this record."
+              ></textarea>
+            </label>
+            <button class="button primary" type="submit">Post comment</button>
+            <p id="comment-result" class="form-message"></p>
+          </form>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
